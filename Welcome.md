@@ -22,7 +22,7 @@ Amazon ECSにアプリケーションをデプロイする場合、アプリケ�
 
 コンテナイメージは一般的にDockerfileから作られる。Dockerfileはコンテナに含まれるすべてのコンポーネントが記述されているplan textファイルである。レジストリーに保存されたコンテナイメージをダウンロードし、コンテナインスタンス上で動かすことが出来る。より詳細な情報は[Docker Basics](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/docker-basics.html)を参照。
 
-![ecsfig2](ecsfig2.svg)
+![ecsfig2](https://rawgithub.com/hacker65536/awsdoc-ecs/master/ecsfig2.svg)
 
 ###Task Definitions
 Amazon ECS上にアプリケーションを動かすために*task definition*を作る。task definitionはjsonフォーマットのテキストファイルでアプリケーションの形を一つ以上記述する。それはアプリケーションの設計図として考える事ができる。Task definitionsは様々のパラメータを設定できる。例えば、どのリポジトリにあるコンテナを使用するか、どのポートをコンテナインスタンスに開けるか、コンテナはどのdata volumeを使用すべきかなど。より詳しい内容は[Amazon ECS Task Definitions](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_defintions.html)を参照。
@@ -51,7 +51,7 @@ taskとはクラスタ内にあるコンテナインスタンス上のtask defin
 
 Amazon ECS taskスケジューラーはコンテナインスタンスにタスク配置することを受け持つ。いくつか異なるスケジューリングオプションを利用できる。例えば、指定した数のtaskを同時に起動やメンテンナスをするよう定義できる。異なるスケジューリングオプションについては[Scheduling Amazon ECS Tasks](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/scheduling_tasks.html)を参照。
 
-![ecsfig3](ecsfig3.svg)
+![ecsfig3](https://rawgithub.com/hacker65536/awsdoc-ecs/master/ecsfig3.svg)
 
 ###Clusters
 Amazon ECSはEC2インスタンスの論理グループであるclusterにtaskを配置して起動する。taskのパーツのコンテナを作っているのはコンテナインスタンスと呼ばれるものである。Amazon ECSはクラスタのコンテナインスタンスにあなたが指定したregistryからダウンロードし、起動する。
