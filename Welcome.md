@@ -12,7 +12,7 @@ AWS Elastic Beanstalk もあなたのアプリケーションのインフラの�
 
 Amazon ECS は一つのリージョン内のマルチAZにわたる高い可用手法のアプリケーションコンテナを起動するために簡素化したリージョン依存のサービス。すでにあるVPC、また新しいVPCをにECSを作ることが出来る。特定のDockerimageから作られたクラスタを起動した後にtask definitionsとサービスを設定することが出来る。コンテナイメージはAWS環境内や外のコンテナリポジトリに保存やpullする。
 
-![fig](ecs1fig.svg)
+![fig](./ecsfig1.svg)
 
 
 次のセクションではAmazon ECS アーキテクチャの個々の要素により詳細に触れていく。
