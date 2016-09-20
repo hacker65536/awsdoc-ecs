@@ -6,7 +6,7 @@
 * Docker Basics
 * Getting Started
 * [Cleaning Up](ECS_CleaningUp.md)
-* Clusters
+* [Clusters](ECS_clusters.md)
    * Creating a Cluster
    * Scaling a Cluster
    * Deleting a Cluter
