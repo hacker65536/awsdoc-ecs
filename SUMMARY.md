@@ -16,4 +16,8 @@
    * Launching a Container instance
    * Connect to your Container Instance
    * [CloudWatch Logs](using_cloudwatch_logs.md)
-
+   * [Managing Container Instances Remotely](ec2-run-command.md)
+   * [Starting a Task at Container Instance Launch Time](start_task_at_launch.md)
+   * [Deregister Container Instance](deregister_container_instance.md)
+* [Container Agent](ECS_agent.md)
+  * [Installing the Amazon ECS Container Agent](ecs-agent-install.md)
