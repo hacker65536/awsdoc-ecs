@@ -10,4 +10,9 @@
   * Scaling a Cluster
   * Deleting a Cluter
 * Continer Instances
+  * Container Instance AMIs
+    * Amazon ECS-optimized AMI
+  * Launching a Container instance
+  * Connect to your Container Instance
+  * [CloudWatch Logs](using_cloudwatch_logs.md)
 
