@@ -5,7 +5,7 @@
 * [Setting Up](get-set-up-for-amazon-ecs.md)
 * Docker Basics
 * Getting Started
-* Cleaning Up
+* [Cleaning Up](ECS_CleaningUp.md)
 * Clusters
    * Creating a Cluster
    * Scaling a Cluster
