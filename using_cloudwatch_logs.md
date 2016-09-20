@@ -60,3 +60,31 @@ __ECS-CloudWatchLogs__policyをecsInstanceRoleに追加したら container insta
 ```
 sudo yum install -y awslog
 ```
+インストールできれば次のセクションに進みagentの設定を行う
+##Configuring and Starting the CloudWatch Logs Agent
+
+CloudWatch Logs agentの設定ファイル(/etc/awslogs/awslogs.conf)がCloudWatch Logsにログファイルを送る設定を記述している。[general]セクションで全ログストリームに関する一般的な設定を行う。個別にモニターしたいログストリームあればセクションに追加する。詳細は[CloudWatch Logs Agent Reference](http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/AgentReference.html)を参照。
+
+下記はAmazon ECS-optimized AMI用の設定ファイルでいくつか一般的なログストリームを設定する
+
+/var/log/dmseg  
+>Linux kernelのbuffer message 
+  
+/var/log/messages
+
+>Global system messages
+
+/var/log/docker  
+
+>Docker daemon log message
+
+/var/log/ecs/ecs-init.log
+>upstartジョブのecs-initのlog
+
+/var/log/ecs/ecs-agent.log
+>Amazon ECS container agentのlog
+
+/var/log/ecs/audit.log
+>task credential providerのIAM rolesからのログ
+
+下記のサンプルファイルを使用する場合は__{cluster}__と__{continer_instance_id}__
