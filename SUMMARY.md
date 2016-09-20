@@ -9,7 +9,7 @@
   * Creating a Cluster
   * Scaling a Cluster
   * Deleting a Cluter
-* Continer Instances
+* [Continer Instances](ECS_instances.md)
   * Container Instance AMIs
     * Amazon ECS-optimized AMI
   * Launching a Container instance
