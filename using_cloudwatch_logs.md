@@ -128,3 +128,27 @@ log_group_name = /var/log/ecs/audit.log
 log_stream_name = {cluster}/{container_instance_id}
 datetime_format = %Y-%m-%dT%H:%M:%SZ
 ```
+
+**CloudWatch Logs agentの設定を行う**
+1. 既存の設定ファイルのバックアップを行う<br />
+```bash
+sudo mv /etc/awslogs/awslogs.conf{,.bak}
+```
+2. 空のファイルを作る <br />
+```bash
+sudo touch /etc/awslogs/awslogs.conf
+```
+3. /etc/awslogs/awslogs.confをテキストエディタで開き上記のサンプルを挿入する
+4. **jq**(json utility)をインストール<br />
+```bash
+sudo yum install -y jq
+```
+5. cluster名をAmazon ECS introspection APIに問い合わせし、環境変数にsetする<br />
+```bash
+cluster=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .Cluster')
+```
+6. 前のステップでsetした環境変数を{cluster}プレースホルダーとリプレースする<br />
+```
+sudo sed -i -e "s/{cluster}/$cluster/g" /etc/awslogs/awslogs.conf
+```
+7. 
