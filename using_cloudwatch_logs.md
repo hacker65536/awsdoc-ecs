@@ -151,4 +151,13 @@ cluster=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .Cluster')
 ```
 sudo sed -i -e "s/{cluster}/$cluster/g" /etc/awslogs/awslogs.conf
 ```
-7. 
+7. container IDを Amazon ECS introspection APIに問合せして環境変数にsetする
+```
+container_instance_id=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $2}' )
+```
+8. {container_instance_id}プレースホルダーを前のステップでset下環境変数とリプレースする
+```
+sudo sed -i -e "s/{container_instance_id}/$container_instance_id/g" /etc/awslogs/awslogs.conf
+```
+**CloudWatch Logs agentのリージョンを設定する**
+defaultではCloudWatch Logs agentは __us-east-1__にデータを送る様になっている。
