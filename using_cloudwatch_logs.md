@@ -184,4 +184,8 @@ CloudWatch Logs にログを送る権限を正しく設定したロールがcont
 **CloudWatch Logs データの見方**
 1. CloudWatch consoleを開く
 2. 左のナビゲーションバーから**Logs**を選択
-3. 
+3. 設定したlog groupを確認できる
+4. 確認したいlog groupを選択
+5. みたい log steamを選択する。ストリームは クラスタ名と container instance IDによって識別される
+
+
