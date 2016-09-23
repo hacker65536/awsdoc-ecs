@@ -165,3 +165,14 @@ defaultではCloudWatch Logs agentは __us-east-1__にデータを送る様に�
 1. /etc/awslogs/awscli.confをファイルエディターで開く
 2. [default]セクションのus-east-1を適宜に置き換えてる
 3. saveする
+
+**CloudWatch Logs agentを起動する**
+1. CloudWatch Logs agentを下記のコマンドでスタートさせる
+```
+sudo service awslogs start
+```
+2. chekconfigコマンドでリブート時にCloudWatch Logs agentが起動するように設定する
+```
+sudo chkconfig awslogs on
+```
+##Viewing CloudWatch Logs
