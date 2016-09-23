@@ -159,5 +159,9 @@ container_instance_id=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | 
 ```
 sudo sed -i -e "s/{container_instance_id}/$container_instance_id/g" /etc/awslogs/awslogs.conf
 ```
+
 **CloudWatch Logs agentのリージョンを設定する**
-defaultではCloudWatch Logs agentは __us-east-1__にデータを送る様になっている。
+defaultではCloudWatch Logs agentは __us-east-1__にデータを送る様になっている。もしclusterがある別のリージョンに送りたいのであれば/etc/awslogs/awscli.confファイルにリージョンをsetする
+1. /etc/awslogs/awscli.confをファイルエディターで開く
+2. [default]セクションのus-east-1を適宜に置き換えてる
+3. saveする
