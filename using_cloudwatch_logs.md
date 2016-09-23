@@ -176,3 +176,8 @@ sudo service awslogs start
 sudo chkconfig awslogs on
 ```
 ##Viewing CloudWatch Logs
+CloudWatch Logs にログを送る権限を正しく設定したロールがcontainer instanceに割り当てられ、agentが起動するように設定していれば、container instanceからlog dataが CloudWatch Logsに送られるようになるだろう。Amazon Management Consoleでログの確認とサーチができるようになる。
+
+**note** 新しいinstanceはログ送信するのに数分かかることがある
+
+**CloudWatch Logs データの見方**
