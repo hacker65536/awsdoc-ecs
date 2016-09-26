@@ -188,4 +188,110 @@ CloudWatch Logs にログを送る権限を正しく設定したロールがcont
 4. 確認したいlog groupを選択
 5. みたい log steamを選択する。ストリームは クラスタ名と container instance IDによって識別される
 
+##Configuring CloudWatch Logs at Launch with User Data
+Amazon EC2で Amazon ECS container instanceをランチする場合、user dataをinstanceに渡すオプションを使えば、個々のinstanceの起動後に走るスクリプトによって自動的にtaskの設定が実行される。幾つかのtypeのuser dataをinstanceに渡すことが出来る。shellscriptを含めたり、cloud-init ディレクティブとupstart jobs。また ランチウィザードにplain textとして、ファイルとして(cli)、また base64-encoded text(API calls)渡すことが出来る。
+
+サンプルuser dataは以下のタスクを実行する
+* awslogs パッケージのinstall(CloudWatch Logs agentが同梱される)
+* install jq Json query utility
+* CloudWatch Logs agentの設定ファイルの書換え、データの送るべきリージョンの設定
+* Cluster名とAmazon ECS cotainer agentが起動後のCotainer instance IDを取得し、CloudWatch Logs agentの設定ファイルのlog streamにそれらの値を書き込む
+* CloudWatch Logs agentを起動
+* system がbootする度に起動するよう設定する
+
+```
+Content-Type: multipart/mixed; boundary="==BOUNDARY=="
+MIME-Version: 1.0
+
+--==BOUNDARY==
+MIME-Version: 1.0
+Content-Type: text/text/x-shellscript; charset="us-ascii"
+#!/bin/bash
+# Install awslogs and the jq JSON parser
+yum install -y awslogs jq
+
+# Inject the CloudWatch Logs configuration file contents
+cat > /etc/awslogs/awslogs.conf <<- EOF
+[general]
+state_file = /var/lib/awslogs/agent-state        
+ 
+[/var/log/dmesg]
+file = /var/log/dmesg
+log_group_name = /var/log/dmesg
+log_stream_name = {cluster}/{container_instance_id}
+
+[/var/log/messages]
+file = /var/log/messages
+log_group_name = /var/log/messages
+log_stream_name = {cluster}/{container_instance_id}
+datetime_format = %b %d %H:%M:%S
+
+[/var/log/docker]
+file = /var/log/docker
+log_group_name = /var/log/docker
+log_stream_name = {cluster}/{container_instance_id}
+datetime_format = %Y-%m-%dT%H:%M:%S.%f
+
+[/var/log/ecs/ecs-init.log]
+file = /var/log/ecs/ecs-init.log.*
+log_group_name = /var/log/ecs/ecs-init.log
+log_stream_name = {cluster}/{container_instance_id}
+datetime_format = %Y-%m-%dT%H:%M:%SZ
+
+[/var/log/ecs/ecs-agent.log]
+file = /var/log/ecs/ecs-agent.log.*
+log_group_name = /var/log/ecs/ecs-agent.log
+log_stream_name = {cluster}/{container_instance_id}
+datetime_format = %Y-%m-%dT%H:%M:%SZ
+
+[/var/log/ecs/audit.log]
+file = /var/log/ecs/audit.log.*
+log_group_name = /var/log/ecs/audit.log
+log_stream_name = {cluster}/{container_instance_id}
+datetime_format = %Y-%m-%dT%H:%M:%SZ
+
+EOF
+
+--==BOUNDARY==
+MIME-Version: 1.0
+Content-Type: text/text/x-shellscript; charset="us-ascii"
+#!/bin/bash
+# Set the region to send CloudWatch Logs data to (the region where the container instance is located)
+region=$(curl 169.254.169.254/latest/meta-data/placement/availability-zone | sed s'/.$//')
+sed -i -e "s/region = us-east-1/region = $region/g" /etc/awslogs/awscli.conf
+
+--==BOUNDARY==
+MIME-Version: 1.0
+Content-Type: text/text/upstart-job; charset="us-ascii"
+
+#upstart-job
+description "Configure and start CloudWatch Logs agent on Amazon ECS container instance"
+author "Amazon Web Services"
+start on started ecs
+
+script
+	exec 2>>/var/log/ecs/cloudwatch-logs-start.log
+	set -x
+	
+	until curl -s http://localhost:51678/v1/metadata
+	do
+		sleep 1	
+	done
+
+	# Grab the cluster and container instance ARN from instance metadata
+	cluster=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .Cluster')
+	container_instance_id=$(curl -s http://localhost:51678/v1/metadata | jq -r '. | .ContainerInstanceArn' | awk -F/ '{print $2}' )
+	
+	# Replace the cluster name and container instance ID placeholders with the actual values
+	sed -i -e "s/{cluster}/$cluster/g" /etc/awslogs/awslogs.conf
+	sed -i -e "s/{container_instance_id}/$container_instance_id/g" /etc/awslogs/awslogs.conf
+	
+	service awslogs start
+	chkconfig awslogs on
+end script
+--==BOUNDARY==--
+```
+
+もし__ECS-CloudWatchLogs__ポリシーを作成しているのなら、[CloudWatch Logs IAM Policy](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_cloudwatch_logs.html#cwl_iam_policy)で説明した__ecsInstanceRole__にアタッチすると、上記のuser dat blockを手動で起動するどのcontainer instanceにも追加できる。また Auto Scaling launch configurationにも追加できる。このuser dataで起動した cotainer instanceは起動後しばらくすると log data をCloudWatch Logs に送るようになる。詳細は[Launching an Amazon ECS container instance](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_container_instance.html)
+
 
