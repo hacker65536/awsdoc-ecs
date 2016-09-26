@@ -18,4 +18,7 @@ sudo service docker start
 ```
 sudo start ecs
 ```
-6. 
+6. agentの起動とinformationをagent introspection APIから確認出来る。(optional)詳細は[ Amazon ECS Container Agent Introspection](ecs-agent-introspection.md)を参照
+
+**Amazon Linux EC2 instance以外にinstallする場合**
+1. 
