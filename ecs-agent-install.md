@@ -19,6 +19,18 @@ sudo service docker start
 sudo start ecs
 ```
 6. agentの起動とinformationをagent introspection APIから確認出来る。(optional)詳細は[ Amazon ECS Container Agent Introspection](ecs-agent-introspection.md)を参照
+```
+curl http://localhost:51678/v1/metadata
+{
+  "Cluster": "default",
+  "ContainerInstanceArn": "<container_instance_ARN>",
+  "Version": "Amazon ECS Agent - v1.12.2 (ecda8a6)"
+}
+```
 
 **Amazon Linux EC2 instance以外にinstallする場合**
-1. 
+1. Amazon ECS をアクセスできる IAM roleが割当られるEC2 instanceを起動する。詳細は[Amazon ECS Container Instance IAM Role](http://docs.aws.amazon.com/AmazonECS/latest/developerguide/instance_IAM_role.html)を参照
+2. instance に接続する
+3. instance にDockerをインスントールする。Amazon ECS は Docker version 1.5.0以上が必要(推奨バージョンは1.11.2)。多くのsystemのpackage manager、例えばyumやapt-getはこのバージョンを持たない。dockerの最新版を特定のLinux ディストリビューションにインスントールする情報については[http://docs.docker.com/installation/](https://docs.docker.com/installation/)を参照。
+
+**note**
