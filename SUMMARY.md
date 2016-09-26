@@ -12,7 +12,7 @@
    * [Deleting a Cluter](delete_cluster.md)
 * [Continer Instances](ECS_instances.md)
    * Container Instance AMIs
-       * Amazon ECS-optimized AMI
+     * Amazon ECS-optimized AMI
    * Launching a Container instance
    * Connect to your Container Instance
    * [CloudWatch Logs](using_cloudwatch_logs.md)
