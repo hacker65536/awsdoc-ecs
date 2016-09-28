@@ -1,4 +1,6 @@
 #IAM Roles for Tasks
 
 task上にあるコンテナに使われるIAM roleに指定することでAmazon ECS tasks用のIAM roles
-アプリはAWS credentialをもってAWS API リクエストに署名しなければいけない。この機能はアプリケーション使用するにあたって必要な資格情報の管理のストラテジを提供する。この方法はEC2 instance profileがEC2 instanceに提供する情報資格と似ている。
+アプリはAWS credentialをもってAWS API リクエストに署名しなければいけない。この機能はアプリケーション使用するにあたって必要な資格情報の管理のストラテジを提供する。この方法はEC2 instance profileがEC2 instanceに提供する情報資格と似ている。コンテナや使用しているEC2 instanceのroleに作成や配布する代わり、IAM role をECS task definition に混ぜるか**RunTask** API操作で行うことができる。taskのコンテナ上のアプリケーションが認証されたAWSサービスに対してAWS SDKやcliを使用してAPIリクエストの作成を行うことが可能になる。
+
+使うにあたってtask definition にIAM roleを定義するか、**RunTask API**操作でtask起動時にtaskRoleArnを手動で上書きすることもできる。role credentialが含まれた追加フィールドをもつtaskが起動時にAmazon ECS agentはpayloadを受け取る。Amazon ECS agent はUUIDという識別tokenをsetし内部のcredentialキャッシュをupdateする。受け取ったpayloadの中にあるrole credentialを指すためのtaskのための識別に使用される
