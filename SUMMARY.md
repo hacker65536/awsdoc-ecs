@@ -27,3 +27,27 @@
   * [Private Registry Athentication](private-auth.md)
   * [Amazon ECS Container Agent Introspection](ecs-agent-introspection.md)
   * [HTTP Proxy Configuration](http_proxy_config.md)
+* [Task Definitions](task_definitions.md)
+  * [Application Architecture](application_architecture.md)
+  * [Createing a Task Definition](create-task-definition.md)
+  * [Using a Docker Image in a Task Definition](using_docker_image.md)
+  * [Task Definition Parameters](task_definition_parameters.md)
+  * [Using Data Volumes in Tasks](using_data_volumes.md)
+  * [Using the awslogs Log Driver](using_awslogs.md)
+  * [Example Task Definitions](example_task_definitions.md)
+  * [Deregistering Task Definitions](deregister-task-definitions.md)
+* [Scheduling Amazon ECS Tasks](scheduling_tasks.md)
+  * [Running Tasks]
+  * [Task Life Cycle]
+* [Services]
+  * [Service Definition Parameters]
+* [IAM Policeis, Roles, and Permissions](IAM_policies.md)
+  * [Policy Structure]
+  * [Supported Resorce-Level Permissions]
+  * [Creating IAM Policies]
+  * [Managed Policies]
+  * [Amazon ECS Container Instance IAM Role]
+  * [Amazon ECS Service Scheduler IAM Role]
+  * [Amazon EC2 Container Service Task Role]
+  * [IAM Roles for Tasks](task-iam-roles.md)
+  * [Amazon ECS IAM Policy Examples]
