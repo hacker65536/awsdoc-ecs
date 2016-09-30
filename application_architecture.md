@@ -11,3 +11,5 @@ definitionとserviceをどうやって作かを考えた場合、個々のコン
 * 個々のコンポーネントのスケールがより難しい、なぜなら全部のコンテナを比例的にスケールしなければいけない
 * Task definitionは定義できるのは10コンテナだけで、アプリケーションは今後より多く必要とする場合がある
 * Task definitionにあるすべてのコンテナは同じ container instance上に配置しなければいけない。それによってinstanceを大きいサイズにしなければいけない。
+
+一般用途のtask definition
