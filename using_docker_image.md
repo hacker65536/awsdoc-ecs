@@ -60,6 +60,7 @@
     ]
 }
 ```
+このtask defnition JSONファイルは２つのコンテナを記している。一つは**amazon-ecs-sample** imageを使っている。defaultではこのimageはAmazon Docker Hub repositoryからpullされる、しかし上記に指定されているamazon 自身のリポジトリに変更できる。
 2. simple-app-task-def.jsonをtask defnitionとして登録する
 ```
 aws ecs register-task-definition --cli-input-json file://simple-app-task-def.json
