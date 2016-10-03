@@ -21,3 +21,4 @@ defaultのDcoker network modeは__bridge__となっている。もし network mo
 10. (オプション) **Add volume**を選び、task の data volumesを設定。詳細は[Usig Data Volumes in Tasks](using_data_volumes.md)を参照
   11. **Name**フィールドvolumeの名前を入力、255文字まで(大文字小文字)、数字、ハイフン、アンダースコア使う可能
   12. (オプション) **Sourcde Path**フィールドに、container instanceがコンテナに提供するpathを入力。もし空であればDcoker daemonがホストパスをアサインする。もしsourcde pathを指定すると手動で消すまで指定されたロケーションを維持する。もし host container instance上にsource pathが存在しなければ、 docker daemonがそれを作る。もし ロケーションがあればsource pathの中身をコンテナにエクスポートされる。
+11. **Create**を選び終了する 
