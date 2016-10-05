@@ -1,0 +1,2 @@
+#Amazon ECS Container Agent Versions
+個々のAmazon ECS container agent version は以前のバージョンと違うbug fixの提供や機能のサポートをしている。もし可能であれば最新のバージョンの利用をおすすめする。最新バージョンのアップデート方法は[Updating the Amazon ECS Container Agent](ecs-agent-update.md)を参照。
