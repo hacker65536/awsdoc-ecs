@@ -1,0 +1,2 @@
+#Amazon ECS Troubleshooting
+load balancers, tasks,servicesやcontainer instancesのトラブルシューティングが必要かもしれません。このチャプターはAmazon ECS コンソールにあるservice event logやcontainer instance上のDocker daemon、Amazone ECS container agentから診断情報を見つけることの助けになるだろう。
