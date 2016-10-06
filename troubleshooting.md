@@ -41,8 +41,13 @@ taskを開始時にtroubleに見舞われるとtaskはエラーによって停�
  
  Essential container in task exited  
  
- task definitions でessentialとマークされたコンテナが 
-6. a
+ もしtask definitions でessentialとマークされたコンテナが終了した場合、taskを停止する。essential containerの終了が原因でtaskが停止した場合、コンテナがなぜ停止したかの診断情報は[Step6]()で提供できる。
+ 
+6. もし停止したコンテナがあれば、containerを展開して、**Status reason**行でtaskのstateが何によって変わったか確認できる。  
+ 前の例で、container image 名が見つけられない場合はimage名のスペルミスがあるかもしれません。
+ もし、この方法で十分な情報を取得出来なければ、container instanceにsshで接続しDocker containerの内部を検査することが出来る。詳細は[Inspect Docker Containers](#docker-inspect)
+
+##Service Event Messages
 
 
  
