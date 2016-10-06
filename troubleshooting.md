@@ -41,7 +41,7 @@ taskを開始時にtroubleに見舞われるとtaskはエラーによって停�
  
  Essential container in task exited  
  
- コンテナ essential 
+ task definitions でessentialとマークされたコンテナが 
 6. a
 
 
