@@ -51,3 +51,9 @@
   * [Amazon EC2 Container Service Task Role]
   * [IAM Roles for Tasks](task-iam-roles.md)
   * [Amazon ECS IAM Policy Examples]
+* [Using the ECS CLI]
+* [Using the AWS CLI]
+* [Service Limits]
+* [CloudTrail Loggin]
+* [Troubleshooting](troubleshooting.md)
+* [AWS Glossary]
