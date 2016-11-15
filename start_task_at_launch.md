@@ -1,0 +1,5 @@
+#Starting a Task at Container Instance Launch Time
+
+アプリケーションのアーキテクチャの設計によっては、操作やセキュリティのモニターリング、セキュリティ、メトリックス、サービスディスカバリー、またはロギングのための対処をするために特定のcontainerをすべてのContainer instanceに配置する必要がある。
+
+この目標を達成するために使用できる方法の1つは、起動時またはUpstartやsystemdなどの一部のinitシステムで、ユーザーデータスクリプトを使用してdocker runコマンドを呼び出すようにコンテナインスタンスを設定することです。
